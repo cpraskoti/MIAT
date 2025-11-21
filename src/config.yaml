@@ -1,0 +1,48 @@
+experiment:
+  name: "MIAT_experiment"
+  model: "MIAT"
+  seed: 72
+  gpu_id: "0"
+
+model:
+  encoder_size: 64
+  n_head: 4
+  att_out: 48
+  in_length: 16
+  out_length: 25 # 25 steps(5 secpnds) of 0.2 seconds each
+  f_length: 5
+  traj_linear_hidden: 32
+  use_elu: true
+  dropout: 0.0
+  relu: 0.1
+  lat_length: 3
+  lon_length: 3
+  use_spatial: false
+  use_maneuvers: false
+  use_true_man: false
+  cat_pred: true
+  use_mse: false
+  
+
+training:
+  batch_size: 128
+  epoch: 100
+  learning_rate: 0.0005
+  pre_epoch: 6
+  val_use_mse: true
+  scale_cross_entropy_loss: 1
+  num_worker: 8
+
+data:
+  dataset: "ngsim" # options: ngsim, highd
+  train_set: "data/processed_data/TrainSet.mat"
+  val_set: "data/processed_data/ValSet.mat"
+  test_set: "data/processed_data/TestSet.mat"
+  highd_train_set: "data/highD/TrainSet_highd.mat"
+  highd_val_set: "data/highD/ValSet_highd.mat"
+  highd_test_set: "data/highD/TestSet.mat"
+
+paths:
+  checkpoint_dir: "checkpoint"
+  log_dir: "logs"
+
